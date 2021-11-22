@@ -32,7 +32,7 @@ namespace AzureFunctions.Controllers
                         product.Name = model.Name;
                         product.Price = model.Price > 0 ? model.Price : product.Price;
                         product.CategoryId = model.CategoryId > 0 ? model.CategoryId : product.CategoryId;
-                        data.Products.Update(product);
+                        var result = data.Products.Update(product);
                         data.SaveChanges();
                     }
 
