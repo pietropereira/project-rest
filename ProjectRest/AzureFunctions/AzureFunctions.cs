@@ -1,12 +1,9 @@
-using System;
-using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using AzureFunctions.Controllers;
 using System.Net.Http;
 using ProjectRest.Models;
@@ -105,16 +102,15 @@ namespace AzureFunctions
                     var resp = _categoryController.Post(category).Result;
                     if (resp.Value.Id > 0)
                     {
-                        responseMessage = $"Categoria {resp.Value.Name} cadastrada com sucesso";
+                        result = new OkObjectResult(category);
                     }
                     else
                     {
                         responseMessage = "Erro ao cadastrar categoria";
+                        result = new OkObjectResult(responseMessage);
                     }
                     
                 }
-                result = new OkObjectResult(responseMessage);
-
             }
             return result;
 
